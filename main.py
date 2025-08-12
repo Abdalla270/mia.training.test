@@ -1,54 +1,66 @@
 # main.py
+import random  # to get random word
 
-import random
+# === Step 1 ===
+file=open("data/words.txt", "r")
+words_list=[]
+for line in file:
+    word = line.strip()
+    words_list.append(word)
+file.close()
 
-# load words from file
-f = open("data/words.txt", "r")
-words_list = []
-for line in f:
-    words_list.append(line.strip())
-f.close()
 
-secret_word = random.choice(words_list)
+# === Step 2 ===
+secretword=random.choice(words_list)
 
-max_attempts = 6
-attempts = 0
-win = False
 
-while attempts < max_attempts:
-    guess = input("Enter a 5 letter word: ").lower()
-    if len(guess) != 5:
-        print("Word must be 5 letters!")
-        continue
+# === Step 3 ===
+max_attempts =6
+attempts =0
+win =0
+
+
+# === Step 4 ===
+while attempts<max_attempts:
+    guess =input("Enter a 5 letter word: ").lower()  #get input
+
+    
+    if len(guess)!=5:
+        print("Wrong ,Word must be 5 letters!")
+        continue  #input again
+
+
     if guess not in words_list:
-        print("Word not in list!")
+        print("Wrong, Word not in list!!!")
         continue
 
-    result = ["_"] * 5
-    temp_secret = list(secret_word)
+    # === Step 5 ===
+    result =["_"] * 5
+    temp_secret = list(secretword) 
 
-    # mark correct letters first
+ 
     for i in range(5):
-        if guess[i] == secret_word[i]:
-            result[i] = guess[i].upper()
-            temp_secret[i] = "*"
+        if guess[i]==secretword[i]:
+            result[i] =guess[i].upper()
+            temp_secret[i]="*"
 
-    # mark present letters
     for i in range(5):
-        if result[i] == "_":
+        if result[i]=="_":
             if guess[i] in temp_secret:
                 result[i] = guess[i]
-                temp_secret[temp_secret.index(guess[i])] = "*"
+                temp_secret[temp_secret.index(guess[i])]="*"
 
-    print("Result:", " ".join(result))
+ 
+    print("Result:"," ".join(result))
 
-    attempts = attempts + 1
+    attempts=attempts+1
 
-    if guess == secret_word:
-        win = True
+    if guess==secretword:
+        win=1
         break
 
+# === Step 6: ===
 if win:
-    print("You Win! The word was:", secret_word)
+    print("You Win! The word was:", secretword)
 else:
-    print("You Lose! The word was:", secret_word)
+    print("You Lose! The word was:", secretword)
