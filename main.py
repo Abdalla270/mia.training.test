@@ -1,11 +1,11 @@
 # main.py
-import random  # to get random word
+import random  # to get word
 
 # === Step 1 ===
-file=open("data/words.txt", "r")
+file=open("data/words.txt","r")
 words_list=[]
 for line in file:
-    word = line.strip()
+    word =line.strip()
     words_list.append(word)
 file.close()
 
@@ -26,7 +26,7 @@ while attempts<max_attempts:
 
     
     if len(guess)!=5:
-        print("Wrong ,Word must be 5 letters!")
+        print("Wrong ,Word must be 5 letters!!!")
         continue  #input again
 
 
@@ -35,8 +35,8 @@ while attempts<max_attempts:
         continue
 
     # === Step 5 ===
-    result =["_"] * 5
-    temp_secret = list(secretword) 
+    result =["_"]*5
+    temp_secret=list(secretword) 
 
  
     for i in range(5):
@@ -47,7 +47,7 @@ while attempts<max_attempts:
     for i in range(5):
         if result[i]=="_":
             if guess[i] in temp_secret:
-                result[i] = guess[i]
+                result[i]=guess[i]
                 temp_secret[temp_secret.index(guess[i])]="*"
 
  
